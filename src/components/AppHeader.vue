@@ -5,9 +5,7 @@ export default {
     image: String,
     title: String
   },
-  mounted() {
-    console.log(this.img);
-  },
+
   methods: {
     getImageUrl(name) {
       return new URL(`${name}`, import.meta.url).href
@@ -29,5 +27,9 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 100px;
+}
+
+header {
+  padding: 1rem 0;
 }
 </style>
