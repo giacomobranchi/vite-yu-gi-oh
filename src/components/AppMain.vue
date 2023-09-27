@@ -1,22 +1,26 @@
 <script>
 import Card from './Card.vue'
-import Axios from 'axios';
+import { state } from '../state.js'
 
 export default {
     name: 'AppMain',
     components: {
-        Card
+        Card,
+
     },
     data() {
         return {
-            cards: []
+            state,
+            arc: ''
         }
     },
 
     mounted() {
-        Axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0').then(response => {
+        state.fetchData(state.base_url);
+        state.getArchetypes()
+        /* Axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0').then(response => {
             this.cards = response.data.data
-        });
+        }); */
         /* this.cards = this.getC() */
     }
 }
@@ -25,11 +29,12 @@ export default {
 <template>
     <main class="p-4">
         <div class="container">
-            <select name="Archetype" id="">
-                <option value="Alien">Alien</option>
+            <select v-model="arc" @change="state.fetchData(state.base_url, arc)" name="Archetype" id="">
+                <option v-for="archetype in state.archetype" :value="archetype.archetype_name">{{ archetype.archetype_name
+                }}</option>
             </select>
             <div class="row">
-                <Card v-for="card in cards" :image="card.card_images[0].image_url" :cName="card.name"
+                <Card v-for="card in state.cards" :image="card.card_images[0].image_url" :cName="card.name"
                     :archetype="card.archetype">
                 </Card>
             </div>
