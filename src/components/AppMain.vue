@@ -43,18 +43,19 @@ export default {
 select {
     border-radius: 8px;
     padding: 0.1rem 0.5rem;
+    margin-bottom: 1rem;
 }
 
 main {
     background-color: orange;
 
     & .container {
-        background-color: white;
         padding: 1rem;
+    }
 
-        & .row {
-            justify-content: space-around;
-        }
+    & .row {
+        background-color: white;
+        justify-content: space-around;
     }
 }
 </style>
